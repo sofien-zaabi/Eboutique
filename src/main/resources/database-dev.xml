@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+ <bean id="datasource" 
+    class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
+<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+<property name="url" value="jdbc:mysql://localhost:3306/sofien"></property>
+<property name="username" value="root"></property>
+<property name="password" value=""></property>
+</bean>
+
+<bean id="persistenceUnitManager" class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
+<property name="defaultDataSource" ref="datasource"></property>
+<property name="persistenceXmlLocations">
+<list>
+<value>classpath*:META-INF/persistance.xml</value>
+</list>
+</property>
+
+
+</bean>
+<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+<property name="persistenceUnitManager" ref="persistenceUnitManager"></property>
+<property name="persistenceUnitName" value="UP_EBOUTIQUE"></property>
+</bean>
+
+
+</beans>
